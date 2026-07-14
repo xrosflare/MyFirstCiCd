@@ -6,11 +6,10 @@ function App() {
   const [list, setList]= useState<string[]>([])
 
   function addItemToList(newItemList:string){
-    setList([...item, newItemList])
-    setItem('')
+    setList([...list,newItemList])
 
-  }
 
+}
   return (
     <>
     <div>
@@ -23,7 +22,6 @@ function App() {
       <div>This is your to-do list: {list.map((item, index)=>{
         return <li key={index}>{item}</li>
       })}</div>
-      <div>length {list.length}</div>
     </div>
     </>
   )
