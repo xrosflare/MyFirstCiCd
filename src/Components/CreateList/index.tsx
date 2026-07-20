@@ -11,7 +11,7 @@ export default function ToDoList (){
   const [open,setOpen]= useState(false)
 
 let TaskList = [{
-  id:1,
+  id:0,
   task:'example',
   done:false
 }]
@@ -30,6 +30,8 @@ function EditTask(id:number, NewTask:string,status:boolean){
   const newTask = {id:id, task:NewTask,done:status}
   RemoveTask.push(newTask)
   setOpen(false)
+  console.log(RemoveTask)
+  console.log(TaskList)
   return TaskList = RemoveTask
 }
 
@@ -55,15 +57,16 @@ return<>
         placeholder='Activitie'
         onChange={(e)=>setItem(e.target.value) }></input>
       <button onClick={()=>addItemToList(item)}>ADD</button>
-      <div>This is your to-do list: {list.map((item, index)=>{
-          return <li key={index}>{item}
-          <button onClick={()=>deleteItemFromList(item,index)}>DONE</button>
-          <button onClick={()=>updateTask(item,index)}>EDIT</button>
+      <div>This is your to-do list: 
+        {TaskList.map((item, id)=>{
+          return <li key={id}>{item.task}
+          {/* <button onClick={()=>deleteItemFromList(id, item.task)}>DONE</button> */}
+          {/* <button onClick={()=>updateTask(item,index)}>EDIT</button> */}
           <button onClick={()=>setOpen(true)}>EDIT</button>
-          {!open && (
+          {open && (
             <>
             <input placeholder="Type the new task" onChange={(e)=>setUpdateItem(e.target.value)}></input>
-            <button onClick={()=>EditTask(index, updateItem,false)}>SAVE</button>
+            <button onClick={()=>EditTask(id, updateItem,false)}>SAVE</button>
             </>
           )
           }
