@@ -1,72 +1,60 @@
 import { useState } from "react"
-
-
+type TaskType = {
+id:number,
+task:string,
+done:boolean
+}
+// let TaskList: TaskType[]=[]
 
 
 export default function ToDoList (){
  const [item, setItem] = useState<string>('')
- const [updateItem, setUpdateItem] = useState<string>('')
-  const [list, setList]= useState<string[]>([])
-  const [doneList, setDoneList]= useState<string[]>([])
+ const [editedItem, setEditedItem] = useState<string>('')
   const [open,setOpen]= useState(false)
+  const [taskList,setTaskList]= useState<TaskType[]>([])
+  const [doneList,setDoneList]= useState<TaskType[]>([])
 
-let TaskList = [{
-  id:0,
-  task:'example',
-  done:false
-}]
 
-function CreateTask (id:number, task:string,done:boolean){
-TaskList.push({id:id,task:task, done:false})
+function CountId(){
+  // return Number(TaskList.length)+1
+  return 0
 }
 
-function DeleteTask(id:number){
-return TaskList.filter(tasks=> tasks.id !== id)
-
+function createTask (id:number, task:string,done:boolean){
+  // TaskList.push({id:id,task:task, done:done})
+  setTaskList([...taskList, {id:id,task:task, done:done} ])
 }
 
-function EditTask(id:number, NewTask:string,status:boolean){
-  const RemoveTask =  TaskList.filter(tasks => tasks.id !== id)
-  const newTask = {id:id, task:NewTask,done:status}
-  RemoveTask.push(newTask)
-  setOpen(false)
-  console.log(RemoveTask)
-  console.log(TaskList)
-  return TaskList = RemoveTask
+function doneTask(id:number){
+ const removedTask= taskList.filter(task=> task.id != id)
+ setTaskList([...removedTask])
+ setDoneList([...removedTask])
 }
 
-
-
-
-  function addItemToList(newItemList:string){
-    setList([...list,newItemList])
-}
-function deleteItemFromList(itemToDelete:string, indexToDelete:number){
-const updatedList = list.filter((itemToDelete)=> itemToDelete != list[indexToDelete])
-setList(updatedList)
-setDoneList([...doneList,itemToDelete])
+function editTask(id:number, task:string, status:boolean){
+setTaskList(taskListPrevious => taskListPrevious.map(item=> {
+  if(item.id == id){
+    return {...item, task:task }
+  }
+  return item
+}))
 }
 
-function updateTask(itemToUpdate:string, indexItem:number){
-  const updatedTask = list.filter((itemToUpdate)=> itemToUpdate != list[indexItem])
-  setList([...updatedTask, itemToUpdate])
-}
 
 return<>
  <input
         placeholder='Activitie'
         onChange={(e)=>setItem(e.target.value) }></input>
-      <button onClick={()=>addItemToList(item)}>ADD</button>
+      <button onClick={()=>createTask(CountId(),item,false)}>ADD</button>
       <div>This is your to-do list: 
-        {TaskList.map((item, id)=>{
+        {taskList.map((item, id)=>{
           return <li key={id}>{item.task}
-          {/* <button onClick={()=>deleteItemFromList(id, item.task)}>DONE</button> */}
-          {/* <button onClick={()=>updateTask(item,index)}>EDIT</button> */}
           <button onClick={()=>setOpen(true)}>EDIT</button>
+          <button onClick={()=>setOpen(true)}>DONE</button>
           {open && (
             <>
-            <input placeholder="Type the new task" onChange={(e)=>setUpdateItem(e.target.value)}></input>
-            <button onClick={()=>EditTask(id, updateItem,false)}>SAVE</button>
+            <input placeholder="Type the new task" onChange={(e)=>setEditedItem(e.target.value)}></input>
+            <button onClick={()=>editTask(id, editedItem,false)}>SAVE</button>
             </>
           )
           }
@@ -75,8 +63,8 @@ return<>
         })}</div>
         
         <div>Here is your done list:
-          {doneList.map((item,index)=>{
-            return <li key={index} >{item}</li>
+          {taskList.map((item,id)=>{
+            return <li key={id} >{item.task}</li>
           })}
         </div>
         </>
