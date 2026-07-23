@@ -25,12 +25,14 @@ function CountId(){
 function createTask (id:string, task:string,done:boolean){
   // TaskList.push({id:id,task:task, done:done})
   setTaskList([...taskList, {id:id,task:task, done:done} ])
+  setItem('')
 }
 
-function doneTask(id:string){
- const removedTask= taskList.filter(task=> task.id != id)
- setTaskList([...removedTask])
- setDoneList([...removedTask])
+function doneTask(id:string,task:string,done:boolean){
+  const taskToRemove= taskList.filter(task=> task.id == id)  
+  const tasksUpdated= taskList.filter(task=> task.id != id)
+ setTaskList([...tasksUpdated])
+ setDoneList([...doneList,{id:id, task:task, done:done}])
 }
 
 function editTask(id:string, task:string, status:boolean){
@@ -41,22 +43,28 @@ setTaskList(taskListPrevious => taskListPrevious.map(item=> {
   }
   return item
 }))
+setEditedItem('')
+setOpen(false)
 }
 
 
 return<>
  <input
         placeholder='Activitie'
+        value={item}
         onChange={(e)=>setItem(e.target.value) }></input>
       <button onClick={()=>createTask(CountId(),item,false)}>ADD</button>
       <div>This is your to-do list: 
         {taskList.map((item, index)=>{
           return <li key={item.id}>{item.task}
           <button onClick={()=>setOpen(true)}>EDIT</button>
-          <button onClick={()=>setOpen(true)}>DONE</button>
+          <button onClick={()=>doneTask(item.id,item.task,item.done)}>DONE</button>
           {open && (
             <>
-            <input placeholder="Type the new task" onChange={(e)=>setEditedItem(e.target.value)}></input>
+            <input 
+            placeholder="Type the new task" 
+            value={editedItem} 
+            onChange={(e)=>setEditedItem(e.target.value)}></input>
             <button onClick={()=>editTask(item.id, editedItem,false)}>SAVE</button>
             </>
           )
@@ -66,7 +74,7 @@ return<>
         })}</div>
         
         <div>Here is your done list:
-          {taskList.map((item,id)=>{
+          {doneList.map((item,id)=>{
             return <li key={id} >{item.task}</li>
           })}
         </div>
