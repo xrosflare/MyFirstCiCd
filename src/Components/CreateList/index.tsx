@@ -43,8 +43,9 @@ setTaskList(taskListPrevious => taskListPrevious.map(item=> {
   }
   return item
 }))
-setEditedItem('')
+  setEditedItem('')
 setOpen(false)
+
 }
 
 
@@ -73,7 +74,7 @@ return<>
 
         })}</div>
         
-        <div>Here is your done list:
+        <div>Here is what you done:
           {doneList.map((item,id)=>{
             return <li key={id} >{item.task}</li>
           })}

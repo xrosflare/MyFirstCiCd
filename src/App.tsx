@@ -1,6 +1,7 @@
 import './App.css'
 import ToDoList from './Components/CreateList'
 import FootAvaliator from './Components/CreateList/Avaliator'
+import WeatherCheck from './Components/WeatherCheck'
 
 function App() {
  
@@ -15,6 +16,9 @@ function App() {
     </div>
 <div>
   <FootAvaliator/>
+</div>
+<div>
+  <WeatherCheck/>
 </div>
     </>
   )
