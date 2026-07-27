@@ -90,5 +90,3 @@ export default function ToDoList() {
     </>
   );
 }
-
-//next step will be to create a modal to edit the tasks when clicking edit
