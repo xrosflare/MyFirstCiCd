@@ -4,16 +4,21 @@ import { useNavigate } from 'react-router-dom';
 export function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  
-  // 1. Inicialize o hook useNavigate
+  const defaultUser = import.meta.env.VITE_USER
+  const defaultPassword = import.meta.env.VITE_PASSWORD
+
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = (e:any) => {
     e.preventDefault();
-    if (email === "user@email.com" && senha === "123456") {      
+    if (email === defaultUser && senha === defaultPassword) {    
+              alert(`Access granted, Welcome ${email}`);
+  
       navigate('/dashboard');      
     } else {
-      alert("Credenciais inválidas!");
+      alert("Email or Password invalids!");
+      setSenha('')
+      setEmail('')
     }
   };
 
@@ -23,8 +28,8 @@ export function Login() {
       <form onSubmit={handleLogin}>
         <div>
           <input 
-            type="email" 
-            placeholder="Seu e-mail" 
+            type="text" 
+            placeholder="User or Email" 
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
