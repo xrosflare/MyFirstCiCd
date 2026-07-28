@@ -4,14 +4,15 @@ import { useNavigate } from 'react-router-dom';
 export function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const defaultUser = import.meta.env.VITE_USER
+  const defaultValidUser = import.meta.env.VITE_USER
   const defaultPassword = import.meta.env.VITE_PASSWORD
 
   const navigate = useNavigate();
 
   const handleLogin = (e:any) => {
     e.preventDefault();
-    if (email === defaultUser && senha === defaultPassword) {    
+    if (email === defaultValidUser && senha === defaultPassword) {    
+        localStorage.setItem('@app:user',email)
               alert(`Access granted, Welcome ${email}`);
   
       navigate('/dashboard');      

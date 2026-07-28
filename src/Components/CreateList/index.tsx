@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 type TaskType = {
@@ -6,7 +7,6 @@ type TaskType = {
   task: string;
   done: boolean;
 };
-// let TaskList: TaskType[]=[]
 
 export default function ToDoList() {
   const [item, setItem] = useState<string>('');
@@ -14,6 +14,8 @@ export default function ToDoList() {
   const [open, setOpen] = useState(false);
   const [taskList, setTaskList] = useState<TaskType[]>([]);
   const [doneList, setDoneList] = useState<TaskType[]>([]);
+  const [user,setUser]= useState<string>('')
+  const navigate = useNavigate()
 
   function CountId() {
     const newId = uuidv4();
@@ -33,6 +35,24 @@ export default function ToDoList() {
     setDoneList([...doneList, { id: id, task: task, done: done }]);
   }
 
+  useEffect(()=>{
+    const loggedUser = localStorage.getItem('@app:user');
+    if(!loggedUser){
+      alert('User expired or not found, please login again')
+      navigate('/')
+      }
+      else{
+        setUser(loggedUser)
+      }
+  },[navigate])
+
+  const handleLogout = ()=>{
+localStorage.removeItem('@app:user')
+alert('See you next time!')
+navigate('/')
+  }
+
+  
   function editTask(id: string, task: string, status: boolean) {
     setTaskList((taskListPrevious) =>
       taskListPrevious.map((item) => {
@@ -48,6 +68,7 @@ export default function ToDoList() {
 
   return (
     <>
+
       <input
         placeholder="Activitie"
         value={item}
@@ -87,6 +108,7 @@ export default function ToDoList() {
           return <li key={id}>{item.task}</li>;
         })}
       </div>
+      <button onClick={handleLogout}>logout</button>
     </>
   );
 }
