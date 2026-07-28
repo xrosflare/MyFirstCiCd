@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
 type TaskType = {
@@ -7,6 +8,8 @@ type TaskType = {
   task: string;
   done: boolean;
 };
+export const successTime: number = import.meta.env.VITE_SUCCESS_TOAST_TIME;
+export const errorTime: number = import.meta.env.VITE_ERROR_TOAST_TIME;
 
 export default function ToDoList() {
   const [item, setItem] = useState<string>('');
@@ -14,8 +17,8 @@ export default function ToDoList() {
   const [open, setOpen] = useState(false);
   const [taskList, setTaskList] = useState<TaskType[]>([]);
   const [doneList, setDoneList] = useState<TaskType[]>([]);
-  const [user,setUser]= useState<string>('')
-  const navigate = useNavigate()
+  const [user, setUser] = useState<string>('');
+  const navigate = useNavigate();
 
   function CountId() {
     const newId = uuidv4();
@@ -23,36 +26,36 @@ export default function ToDoList() {
   }
 
   function createTask(id: string, task: string, done: boolean) {
-    // TaskList.push({id:id,task:task, done:done})
     setTaskList([...taskList, { id: id, task: task, done: done }]);
     setItem('');
   }
 
   function doneTask(id: string, task: string, done: boolean) {
-    const taskToRemove = taskList.filter((task) => task.id == id);
     const tasksUpdated = taskList.filter((task) => task.id != id);
     setTaskList([...tasksUpdated]);
     setDoneList([...doneList, { id: id, task: task, done: done }]);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     const loggedUser = localStorage.getItem('@app:user');
-    if(!loggedUser){
-      alert('User expired or not found, please login again')
-      navigate('/')
-      }
-      else{
-        setUser(loggedUser)
-      }
-  },[navigate])
+    if (!loggedUser) {
+      toast.error('User expired or not found, please login again', {
+        autoClose: errorTime,
+      });
+      navigate('/');
+    } else {
+      setUser(loggedUser);
+    }
+  }, [navigate, taskList]);
 
-  const handleLogout = ()=>{
-localStorage.removeItem('@app:user')
-alert('See you next time!')
-navigate('/')
-  }
+  const handleLogout = () => {
+    localStorage.removeItem('@app:user');
+    toast.success('See you soon!', {
+      autoClose: successTime,
+    });
+    navigate('/');
+  };
 
-  
   function editTask(id: string, task: string, status: boolean) {
     setTaskList((taskListPrevious) =>
       taskListPrevious.map((item) => {
@@ -68,7 +71,6 @@ navigate('/')
 
   return (
     <>
-
       <input
         placeholder="Activitie"
         value={item}

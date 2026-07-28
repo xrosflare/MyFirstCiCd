@@ -8,10 +8,10 @@ import { Login } from './pages/login.tsx';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-    <Routes>
-<Route path='/' element={<Login/>}/>
-<Route path='/dashboard' element={<App/>}/>
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<App />} />
+      </Routes>
     </BrowserRouter>
   </StrictMode>,
 );
