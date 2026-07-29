@@ -7,26 +7,26 @@ import WeatherCheck from './Components/WeatherCheck';
 
 function App() {
   return (
-    <>
+    <div className='AppContainer'>
       <ToastContainer
         position="top-right"
         hideProgressBar={false}
         closeOnClick
         pauseOnHover
         theme="colored"
-      />
+        />
 
-      <div>Bellow will be your to-do list</div>
-      <div>
+      <div className='ToDoContainer'>
         <ToDoList />
       </div>
-      <div>
-        <FootAvaliator />
-      </div>
-      <div>
+
+      <div className='WeatherContainer'>
         <WeatherCheck />
       </div>
-    </>
+      <div className='FootContainer'>
+        <FootAvaliator />
+      </div>
+        </div>
   );
 }
 

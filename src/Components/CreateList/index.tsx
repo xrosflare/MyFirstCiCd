@@ -73,6 +73,8 @@ export default function ToDoList() {
 
   return (
     <>
+          <span>Bellow will be your to-do list</span>
+
       <input
         placeholder="Activitie"
         value={item}
