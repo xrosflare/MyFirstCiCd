@@ -53,7 +53,9 @@ export default function ToDoList() {
     toast.success('See you soon!', {
       autoClose: successTime,
     });
-    navigate('/');
+    setTimeout(() => {      
+      navigate('/');
+    }, 500);
   };
 
   function editTask(id: string, task: string, status: boolean) {

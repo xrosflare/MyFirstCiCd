@@ -16,12 +16,13 @@ export function Login() {
   const handleLogin = (e: any) => {
     e.preventDefault();
     if (email === defaultValidUser && senha === defaultPassword) {
+        toast.success(`Access granted, Welcome ${email}`, {
+          autoClose: successTime,
+        });
       localStorage.setItem('@app:user', email);
-      toast.success(`Access granted, Welcome ${email}`, {
-        autoClose: successTime,
-      });
-
-      navigate('/dashboard');
+      setTimeout(() => {          
+          navigate('/dashboard');
+      }, 500);
     } else {
       setSenha('');
       setEmail('');
@@ -40,7 +41,7 @@ export function Login() {
         pauseOnHover
         theme="colored"
       />
-      <h2>Página de Login</h2>
+      <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
           <input
