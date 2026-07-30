@@ -1,7 +1,7 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-import ToDoList from './Components/CreateList';
+import ToDoList from './Components/CreateList/ToDoList';
 import FootAvaliator from './Components/CreateList/Avaliator';
 import WeatherCheck from './Components/WeatherCheck';
 
