@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './login.css'
 
-import { errorTime, successTime } from '../Components/CreateList';
+
+import { errorTime, successTime } from '../Components/CreateList/ToDoList';
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -33,7 +35,7 @@ export function Login() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div className='LoginContainer'>
       <ToastContainer
         position="top-right"
         hideProgressBar={false}
@@ -63,6 +65,11 @@ export function Login() {
         <br />
         <button type="submit">Entrar</button>
       </form>
+      <br />
+      <div>
+      <button>New Acc</button>
+      <button>Recover</button>
+      </div>
     </div>
   );
 }
