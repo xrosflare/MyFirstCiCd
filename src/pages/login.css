@@ -19,4 +19,14 @@ input{
 }
 button{
     cursor: pointer;
+    color:black;
+    gap:1em;
+}
+
+.newAccButton, .recoverButton{
+    background-color: lightblue;
+
+}
+.loginButton{
+background-color: lightgreen;
 }

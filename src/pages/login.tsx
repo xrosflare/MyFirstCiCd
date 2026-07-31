@@ -63,12 +63,12 @@ export function Login() {
           />
         </div>
         <br />
-        <button type="submit">Entrar</button>
+        <button type="submit" className='loginButton' title='login'>Entrar</button>
       </form>
       <br />
       <div>
-      <button>New Acc</button>
-      <button>Recover</button>
+      <button className='newAccButton' title='New account'>New Acc</button>
+      <button className='recoverButton' title='Recover account'>Recover</button>
       </div>
     </div>
   );
