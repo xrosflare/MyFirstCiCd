@@ -5,6 +5,11 @@
     align-items: center;
     justify-content: center;    
 }
+.ToDoListMapContainer, .DoneListMapContainer{
+max-height: 300px;
+overflow-y: auto;
+}
+
 li{
     display: flex;
     flex-direction: row;

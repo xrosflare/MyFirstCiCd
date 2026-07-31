@@ -14,10 +14,10 @@ export const errorTime: number = import.meta.env.VITE_ERROR_TOAST_TIME;
 export default function ToDoList() {
   const [item, setItem] = useState<string>('');
   const [editedItem, setEditedItem] = useState<string>('');
-  const [open, setOpen] = useState(false);
   const [taskList, setTaskList] = useState<TaskType[]>([]);
   const [doneList, setDoneList] = useState<TaskType[]>([]);
   const [user, setUser] = useState<string>('');
+  const[idInEdition, setIdInEdition ] = useState<string>('')
   const navigate = useNavigate();
 
   function CountId() {
@@ -34,6 +34,10 @@ export default function ToDoList() {
     const tasksUpdated = taskList.filter((task) => task.id != id);
     setTaskList([...tasksUpdated]);
     setDoneList([...doneList, { id: id, task: task, done: done }]);
+  }
+
+  function detectEditionTask(id:string){
+    setIdInEdition(id)
   }
 
   useEffect(() => {
@@ -68,7 +72,7 @@ export default function ToDoList() {
       }),
     );
     setEditedItem('');
-    setOpen(false);
+    setIdInEdition('')
   }
 
   return (
@@ -81,17 +85,18 @@ export default function ToDoList() {
         onChange={(e) => setItem(e.target.value)}
       ></input>
       <button onClick={() => createTask(CountId(), item, false)}>ADD</button>
-      <div>
+      <div className='ToDoListMapContainer'>
         This is your to-do list:
         {taskList.map((item, index) => {
           return (
             <li key={item.id}>
               {item.task}
-              <button onClick={() => setOpen(true)} className='editButton'>EDIT</button>
+              <button onClick={() => detectEditionTask(item.id)} className='editButton'>EDIT</button>
+              {/* <button onClick={() => setOpen(true)} className='editButton'>EDIT</button> */}
               <button onClick={() => doneTask(item.id, item.task, item.done)} className='doneButton'>
                 DONE
               </button>
-              {open && (
+              {idInEdition == item.id && (
                 <>
                   <input
                     placeholder="Type the new task"
@@ -108,11 +113,15 @@ export default function ToDoList() {
         })}
       </div>
 
-      <div>
+      <div className='DoneListMapContainer'>
         Here is what you done:
+        <s>
         {doneList.map((item, id) => {
-          return <li key={id}>{item.task}</li>;
+        return     <li key={id}>
+            {item.task}
+            </li>;
         })}
+        </s>
       </div>
       <button onClick={handleLogout} className='logoutButton'>logout</button>
     </div>
