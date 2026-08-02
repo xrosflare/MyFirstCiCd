@@ -1,0 +1,41 @@
+.ToDoListContainer{
+    display: flex;
+    flex-direction: column;
+    width: 99dvw;
+    height:80dvh; 
+    align-items: center;
+    justify-content: center;    
+}
+.ToDoListMapContainer, .DoneListMapContainer{
+max-height: 300px;
+overflow-y: auto;
+}
+
+li{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    font-size: 1.4em;
+    font-weight: 700;
+    gap:10px;
+    margin: 1em;
+    border-bottom: solid 2px black;
+    border-radius: 10px;
+}
+button{
+    border-radius:10px;
+    color: white;
+    font-size: 1em;
+}
+
+.editButton{
+    background-color: yellow;
+    color: black;
+}
+.doneButton{
+    background-color: greenyellow;
+    color: black;
+}
+.logoutButton{
+    background-color: red;
+}

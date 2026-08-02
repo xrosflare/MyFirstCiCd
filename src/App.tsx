@@ -1,22 +1,32 @@
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-import ToDoList from './Components/CreateList';
+import ToDoList from './Components/CreateList/ToDoList';
 import FootAvaliator from './Components/CreateList/Avaliator';
 import WeatherCheck from './Components/WeatherCheck';
 
 function App() {
   return (
-    <>
-      <div>Bellow will be your to-do list</div>
-      <div>
+    <div className='AppContainer'>
+      <ToastContainer
+        position="top-right"
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+        />
+
+      <div className='ToDoContainer'>
         <ToDoList />
       </div>
-      <div>
-        <FootAvaliator />
-      </div>
-      <div>
+
+      <div className='WeatherContainer'>
         <WeatherCheck />
       </div>
-    </>
+      <div className='FootContainer'>
+        <FootAvaliator />
+      </div>
+        </div>
   );
 }
 
