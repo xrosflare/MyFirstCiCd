@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
-import './ToDoList.css'
+import './ToDoList.css';
 type TaskType = {
   id: string;
   task: string;
@@ -17,7 +17,7 @@ export default function ToDoList() {
   const [taskList, setTaskList] = useState<TaskType[]>([]);
   const [doneList, setDoneList] = useState<TaskType[]>([]);
   const [user, setUser] = useState<string>('');
-  const[idInEdition, setIdInEdition ] = useState<string>('')
+  const [idInEdition, setIdInEdition] = useState<string>('');
   const navigate = useNavigate();
 
   function CountId() {
@@ -26,6 +26,10 @@ export default function ToDoList() {
   }
 
   function createTask(id: string, task: string, done: boolean) {
+    if (task === '' || task == ' ') {
+      toast.error('Activitie cannot be empty', { autoClose: errorTime });
+      return;
+    }
     setTaskList([...taskList, { id: id, task: task, done: done }]);
     setItem('');
   }
@@ -36,8 +40,8 @@ export default function ToDoList() {
     setDoneList([...doneList, { id: id, task: task, done: done }]);
   }
 
-  function detectEditionTask(id:string){
-    setIdInEdition(id)
+  function detectEditionTask(id: string) {
+    setIdInEdition(id);
   }
 
   useEffect(() => {
@@ -57,7 +61,7 @@ export default function ToDoList() {
     toast.success('See you soon!', {
       autoClose: successTime,
     });
-    setTimeout(() => {      
+    setTimeout(() => {
       navigate('/');
     }, 500);
   };
@@ -72,38 +76,57 @@ export default function ToDoList() {
       }),
     );
     setEditedItem('');
-    setIdInEdition('')
+    setIdInEdition('');
   }
 
   return (
-    <div className='ToDoListContainer'>
-          <span>Bellow will be your to-do list</span>
-
-      <input
-        placeholder="Activitie"
-        value={item}
-        onChange={(e) => setItem(e.target.value)}
-      ></input>
-      <button onClick={() => createTask(CountId(), item, false)}>ADD</button>
-      <div className='ToDoListMapContainer'>
+    <div className="ToDoListContainer">
+      <div className="createActivitieContainer">
+        <span>Bellow will be your to-do list</span>
+        <label htmlFor="Activitie">Activitie</label>
+        <input
+          id="Activitie"
+          type="text"
+          placeholder="Activitie"
+          value={item}
+          minLength={2}
+          required
+          onChange={(e) => setItem(e.target.value)}
+        ></input>
+        <button onClick={() => createTask(CountId(), item, false)}>ADD</button>
+      </div>
+      <div className="ToDoListMapContainer">
         This is your to-do list:
         {taskList.map((item, index) => {
           return (
             <li key={item.id}>
               {item.task}
-              <button onClick={() => detectEditionTask(item.id)} className='editButton'>EDIT</button>
+              <button
+                onClick={() => detectEditionTask(item.id)}
+                className="editButton"
+              >
+                EDIT
+              </button>
               {/* <button onClick={() => setOpen(true)} className='editButton'>EDIT</button> */}
-              <button onClick={() => doneTask(item.id, item.task, item.done)} className='doneButton'>
+              <button
+                onClick={() => doneTask(item.id, item.task, item.done)}
+                className="doneButton"
+              >
                 DONE
               </button>
               {idInEdition == item.id && (
                 <>
+                <label htmlFor="EditTaskInput">Edit your task</label>
                   <input
+                  id='EditTaskInput'
                     placeholder="Type the new task"
                     value={editedItem}
                     onChange={(e) => setEditedItem(e.target.value)}
                   ></input>
-                  <button onClick={() => editTask(item.id, editedItem, false)} className='saveButton'>
+                  <button
+                    onClick={() => editTask(item.id, editedItem, false)}
+                    className="saveButton"
+                  >
                     SAVE
                   </button>
                 </>
@@ -113,17 +136,18 @@ export default function ToDoList() {
         })}
       </div>
 
-      <div className='DoneListMapContainer'>
+      <div className="DoneListMapContainer">
         Here is what you done:
         <s>
-        {doneList.map((item, id) => {
-        return     <li key={id}>
-            {item.task}
-            </li>;
-        })}
+          {doneList.map((item, id) => {
+            return <li key={id}>{item.task}</li>;
+          })}
         </s>
       </div>
-      <button onClick={handleLogout} className='logoutButton'>logout</button>
+
+      <button onClick={handleLogout} className="logoutButton">
+        logout
+      </button>
     </div>
   );
 }
