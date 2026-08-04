@@ -16,13 +16,13 @@ function App() {
         theme="colored"
         />
 
+      <div className='WeatherContainer'>
+        <WeatherCheck />
+      </div>
       <div className='ToDoContainer'>
         <ToDoList />
       </div>
 
-      <div className='WeatherContainer'>
-        <WeatherCheck />
-      </div>
       <div className='FootContainer'>
         <FootAvaliator />
       </div>

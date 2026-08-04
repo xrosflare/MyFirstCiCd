@@ -32,17 +32,6 @@ export function Login() {
       }, 500);
       return;
     }
-
-    // if (validatedCreatedUser !== null localStorage.getItem('@app:newUser')) {
-    //   toast.success(
-    //     `Access granted, Welcome ${localStorage.getItem('@app:newUser')}`,
-    //     { autoClose: successTime },
-    //   );
-    //   setTimeout(() => {
-    //     navigate('/dashboard');
-    //   }, 500);
-    //   return
-    // }
     else {
       setSenha('');
       setEmail('');
