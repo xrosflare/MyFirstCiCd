@@ -34,7 +34,6 @@ export function Login() {
       setTimeout(() => {
         navigate('/dashboard');
       }, 500);
-      
     } else {
       setSenha('');
       setEmail('');
@@ -61,29 +60,34 @@ export function Login() {
       />
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
-        <div>
+        <div className='loginUserContainer'>
+          <label htmlFor="user">User or Email</label>
           <input
             type="text"
             placeholder="User or Email"
+            required
+            minLength={3}
+            maxLength={30}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <br />
-        <div>
+        <div className='loginPasswordContainer'>
+          <label htmlFor="Password">Password</label>
           <input
             type="password"
             placeholder="Password"
+            required
+            minLength={3}
+            maxLength={30}
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
           />
         </div>
-        <br />
         <button type="submit" className="loginButton" title="login">
           Entrar
         </button>
       </form>
-      <br />
       <div>
         <button
           className="newAccButton"

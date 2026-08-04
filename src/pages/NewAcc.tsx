@@ -88,9 +88,8 @@ export function NewAccount() {
       />
       <h2>New Account</h2>
       <form onSubmit={handleCreateUser}>
-        <div className='NewAccInputDiv'>
+        <div className="NewAccInputDiv">
           <label htmlFor="user">Username or Email</label>
-          <br />
           <input
             id="user"
             type="text"
@@ -102,11 +101,9 @@ export function NewAccount() {
             onChange={(e) => setNewEmail(e.target.value)}
           />
         </div>
-        <br />
 
-        <div className='NewAccInputDiv'>
+        <div className="NewAccInputDiv">
           <label htmlFor="password">Password</label>
-          <br />
           <input
             id="password"
             type="password"
@@ -118,11 +115,9 @@ export function NewAccount() {
             onChange={(e) => setNewPassword(e.target.value)}
           />
         </div>
-        <br />
 
-        <div className='NewAccInputDiv'>
+        <div className="NewAccInputDiv">
           <label htmlFor="repeatPassword">Repeat Password</label>
-          <br />
           <input
             id="repeatPassword"
             type="password"
@@ -134,12 +129,11 @@ export function NewAccount() {
             onChange={(e) => setRepeatPassword(e.target.value)}
           />
         </div>
-        <br />
+
         <button type="submit" className="createButton" title="Create">
           Create
         </button>
       </form>
-      <br />
       <div>
         <button
           className="clearButton"
@@ -148,11 +142,7 @@ export function NewAccount() {
         >
           Clear
         </button>
-        <button
-          className="backButton"
-          title="Login Page"
-          onClick={handleBack}
-        >
+        <button className="backButton" title="Login Page" onClick={handleBack}>
           Back
         </button>
       </div>
