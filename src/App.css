@@ -8,14 +8,14 @@
   align-items: center;
 }
 .WeatherContainer {
-  background-color: rgb(236, 255, 127);
+  background-color: aquamarine;
   border: solid 1px green;
-  height: 15%;
+  height: 10%;
   width: 100%;
 }
 .ToDoContainer {
   background-color: aquamarine;
-  height: 70%;
+  height: 85%;
   width: 100%;
 }
 .FootContainer {

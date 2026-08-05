@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import './WeatherCheck.css'
 type WeatherData = {
   temperature: number;
   windspeed: number;
@@ -42,18 +42,18 @@ export default function WeatherCheck() {
     );
   }, []);
   if (loading) {
-    return <>Loading current weather information</>;
+    return <>Loading current weather information, please wait</>;
   }
   if (error) {
     return <>{error}</>;
   }
   return (
-    <div>
-      <h2>Previsao Atual</h2>
+    <div className='weatherContainer'>
       {weather && (
-        <div>
-          <p>Temperature: {weather.temperature}</p>
-          <p>Wind: {weather.windspeed} km/h</p>
+        <div className='weatherStatusContainer'>
+          <h2>Previsao Atual</h2>
+          <p title='Temperature'>Temperature: {weather.temperature}</p>
+          <p title='Wind speed'>Wind: {weather.windspeed} km/h</p>
         </div>
       )}
     </div>
