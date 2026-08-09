@@ -46,6 +46,8 @@ export default function ToDoList() {
 
   useEffect(() => {
     const loggedUser = localStorage.getItem('@app:user');
+    const taskToAvaliate = JSON.stringify(taskList);
+    const setTasks = localStorage.setItem('@tasks:user', taskToAvaliate);
     if (!loggedUser) {
       toast.error('User expired or not found, please login again', {
         autoClose: errorTime,
@@ -116,9 +118,9 @@ export default function ToDoList() {
               </button>
               {idInEdition == item.id && (
                 <>
-                <label htmlFor="EditTaskInput">Edit your task</label>
+                  <label htmlFor="EditTaskInput">Edit your task</label>
                   <input
-                  id='EditTaskInput'
+                    id="EditTaskInput"
                     placeholder="Type the new task"
                     value={editedItem}
                     onChange={(e) => setEditedItem(e.target.value)}
