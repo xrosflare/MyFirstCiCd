@@ -19,6 +19,7 @@ export default function ToDoList() {
   const [user, setUser] = useState<string>('');
   const [idInEdition, setIdInEdition] = useState<string>('');
   const navigate = useNavigate();
+console.log(user)
 
   function CountId() {
     const newId = uuidv4();
@@ -48,6 +49,7 @@ export default function ToDoList() {
     const loggedUser = localStorage.getItem('@app:user');
     const taskToAvaliate = JSON.stringify(taskList);
     const setTasks = localStorage.setItem('@tasks:user', taskToAvaliate);
+    console.log(setTasks)
     if (!loggedUser) {
       toast.error('User expired or not found, please login again', {
         autoClose: errorTime,
@@ -68,7 +70,7 @@ export default function ToDoList() {
     }, 500);
   };
 
-  function editTask(id: string, task: string, status: boolean) {
+  function editTask(id: string, task: string) {
     setTaskList((taskListPrevious) =>
       taskListPrevious.map((item) => {
         if (item.id == id) {
@@ -99,7 +101,7 @@ export default function ToDoList() {
       </div>
       <div className="ToDoListMapContainer">
         This is your to-do list:
-        {taskList.map((item, index) => {
+        {taskList.map((item) => {
           return (
             <li key={item.id}>
               {item.task}
@@ -126,7 +128,7 @@ export default function ToDoList() {
                     onChange={(e) => setEditedItem(e.target.value)}
                   ></input>
                   <button
-                    onClick={() => editTask(item.id, editedItem, false)}
+                    onClick={() => editTask(item.id, editedItem)}
                     className="saveButton"
                   >
                     SAVE

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './WeatherCheck.css'
+import './WeatherCheck.css';
 type WeatherData = {
   temperature: number;
   windspeed: number;
@@ -35,6 +35,7 @@ export default function WeatherCheck() {
         }
       },
       (geoError) => {
+        console.log(geoError);
         setError('Permission denied or location unavailable');
         setLoading(false);
       },
@@ -48,12 +49,12 @@ export default function WeatherCheck() {
     return <>{error}</>;
   }
   return (
-    <div className='weatherContainer'>
+    <div className="weatherContainer">
       {weather && (
-        <div className='weatherStatusContainer'>
+        <div className="weatherStatusContainer">
           <h2>Previsao Atual</h2>
-          <p title='Temperature'>Temperature: {weather.temperature}</p>
-          <p title='Wind speed'>Wind: {weather.windspeed} km/h</p>
+          <p title="Temperature">Temperature: {weather.temperature}</p>
+          <p title="Wind speed">Wind: {weather.windspeed} km/h</p>
         </div>
       )}
     </div>
