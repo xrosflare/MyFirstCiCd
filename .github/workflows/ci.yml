@@ -32,6 +32,7 @@ jobs:
       - run: npm run build
       - run: git config --global user.email "andryws.gseixas@gmail.com"
       - run: git config --global user.name "Andryws Görtz"
+      - run: git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
       - run: npm run deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
