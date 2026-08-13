@@ -1,40 +1,44 @@
-.LoginContainer {
+.NewAccContainer {
+  display: flex;
   width: 100%;
   height: 100%;
-  background-color: lightblue;
-  display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   align-items: center;
+  justify-items: center;
+  background-color: lightgreen;
 }
-.loginUserContainer,
-.loginPasswordContainer {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 0.6em;
-  text-align: center;
-}
+
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-items: center;
+  margin-bottom: 1em;
+}
+
+.NewAccInputDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.6em;
+
+
 }
 input {
-    text-align: center;
   cursor: pointer;
+  text-align: center;
+  border-radius: 5px;
 }
 button {
   cursor: pointer;
   color: black;
-  gap: 1em;
 }
 
-.newAccButton,
-.recoverButton {
+.clearButton,
+.backButton {
   background-color: lightblue;
 }
-.loginButton {
-  background-color: lightgreen;
+.createButton {
+  background-color: lime;
 }

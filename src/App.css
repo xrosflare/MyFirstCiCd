@@ -1,24 +1,24 @@
-.AppContainer{
-background-color: lightgray;
-width: 100%;
-height: 100%;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+.AppContainer {
+  background-color: lightslategray;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.ToDoContainer{
-  background-color: aquamarine;
-  border:solid 1px blue;
-
+.WeatherContainer {
+  background-color: lightslategray;
+  height: 10%;
+  width: 100%;
 }
-.FootContainer{
-  background-color: rgb(127, 255, 159);
-  border:solid 1px red;
-  
+.ToDoContainer {
+  background-color: lightslategray;
+  height: 85%;
+  width: 100%;
 }
-.WeatherContainer{
-  background-color: rgb(236, 255, 127);
-  border:solid 1px green;
-  
+.FootContainer {
+  background-color: lightslategray;
+  height: 15%;
+  width: 100%;
 }
